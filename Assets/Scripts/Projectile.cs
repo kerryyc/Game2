@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-    public float speed;
+    public float speed = 8f;
     public float secondsToDestroy;
 
     private Rigidbody2D rb2d;
+    private GameObject player;
+    private Camera camera;
 
 	// Use this for initialization
 	private void Awake () {
         rb2d = GetComponent<Rigidbody2D>();
-
-        //Invoke("DestroySelf", secondsToDestroy);
+        Invoke("DestroySelf", secondsToDestroy);
     }
 	
 	// Update is called once per frame
@@ -23,5 +24,9 @@ public class Projectile : MonoBehaviour {
 
     private void DestroySelf() {
         Destroy(gameObject);
+    }
+
+    public void changeDirection() {
+        speed = -speed;
     }
 }
