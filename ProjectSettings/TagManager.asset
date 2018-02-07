@@ -8,6 +8,7 @@ TagManager:
   - Undefined
   - Projectile
   - GroundCheck
+  - Background
   layers:
   - Default
   - TransparentFX

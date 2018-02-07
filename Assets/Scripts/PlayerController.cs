@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     public float fallSpeed = 10f;
     public bool canMove = true;
     public float health = 10f;
+    public float fireRate = 0.2f;
 
     public GameObject bulletPrefab;
 
@@ -22,6 +23,9 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb2d;
     private Animator anim;
     private bool facingRight = true;
+    private bool canFire = true;
+    private float fireCoolDown;
+    private float fireAnimationStop;
 
 	// Use this for initialization
 	void Awake () {
@@ -61,7 +65,17 @@ public class PlayerController : MonoBehaviour {
         }
 
         //shoot
-        Shoot();
+        if (Input.GetButtonDown("Fire1") && canFire) {
+            Shoot();
+            anim.SetBool("Shoot", true);
+            canFire = false;
+            fireCoolDown = Time.time + fireRate;
+            fireAnimationStop = Time.time + 10;
+        }
+        if (!canFire && Time.time > fireCoolDown) {
+            canFire = true;
+            anim.SetBool("Shoot", false);
+        }
     }
 
     private void Move() {
@@ -86,15 +100,13 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Shoot() {
-        if (Input.GetButtonDown("Fire1")) {
-            if (facingRight) {
-                GameObject bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(transform.position.x + 1, transform.position.y, 0), transform.rotation);
-                //bullet.GetComponent<Projectile>().changeDirection();
-            }
-            else {
-                GameObject bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(transform.position.x - 1, transform.position.y, 0), transform.rotation);
-                bullet.GetComponent<Projectile>().changeDirection();
-            }
+        if (facingRight) {
+            GameObject bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(transform.position.x + 0.8f, transform.position.y, 0), transform.rotation);
+            //bullet.GetComponent<Projectile>().changeDirection();
+        }
+        else {
+            GameObject bullet = (GameObject)Instantiate(bulletPrefab, new Vector3(transform.position.x - 0.8f, transform.position.y, 0), transform.rotation);
+            bullet.GetComponent<Projectile>().changeDirection();
         }
     }
             
