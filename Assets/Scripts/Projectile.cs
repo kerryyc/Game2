@@ -22,11 +22,19 @@ public class Projectile : MonoBehaviour {
         rb2d.MovePosition(rb2d.position + new Vector2(speed, 0) * Time.deltaTime);
 	}
 
+    void OnTriggerEnter2D(Collider2D coll) {
+        if(coll.gameObject.tag != "Background")
+            DestroySelf();
+    }
+
     private void DestroySelf() {
         Destroy(gameObject);
     }
 
     public void changeDirection() {
         speed = -speed;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 }
