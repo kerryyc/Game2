@@ -70,7 +70,8 @@ public class PlayerController : MonoBehaviour {
             anim.SetBool("Shoot", true);
             canFire = false;
             fireCoolDown = Time.time + fireRate;
-            fireAnimationStop = Time.time + 10;
+            // unused
+            //fireAnimationStop = Time.time + 10;
         }
         if (!canFire && Time.time > fireCoolDown) {
             canFire = true;
