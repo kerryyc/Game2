@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - GroundCheck
   - Background
+  - Spike
   layers:
   - Default
   - TransparentFX
