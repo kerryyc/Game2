@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         //what happens when health is 0
         if (health <= 0)
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
 
         //jump
         if (canMove && isGrounded && Input.GetButtonDown("Jump")) {

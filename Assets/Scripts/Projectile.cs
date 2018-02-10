@@ -9,7 +9,6 @@ public class Projectile : MonoBehaviour {
 
     private Rigidbody2D rb2d;
     private GameObject player;
-    private Camera camera;
 
 	// Use this for initialization
 	private void Awake () {
